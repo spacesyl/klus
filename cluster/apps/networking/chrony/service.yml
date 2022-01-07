@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chrony-udp
+  namespace: network
+  labels:
+    app: chrony
+spec:
+  ports:
+    - name: ntp-udp
+      port: 123
+      protocol: UDP
+      targetPort: 123
+      nodePort: null   
+  selector:
+    app: chrony
+    tier: frontend
+  type: LoadBalancer
+  loadBalancerIP: 10.1.0.102
