@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chrony
-  namespace: network
+  namespace: networking
   labels:
     app: chrony
 spec:
