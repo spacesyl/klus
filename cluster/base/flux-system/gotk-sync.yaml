@@ -9,7 +9,9 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://github.com/spacesyl/klus
+  secretRef:
+    name: flux-system
+  url: ssh://git@github.com/spacesyl/klus
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
