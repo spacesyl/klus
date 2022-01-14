@@ -22,15 +22,9 @@ spec:
     provider: cloudflare
     env:
       - name: CF_API_EMAIL
-        valueFrom:
-          secretKeyRef:
-            name: cloudflare-creds
-            key: email
+        value: ${SECRET_CLOUDFLARE_EMAIL}
       - name: CF_API_KEY
-        valueFrom:
-          secretKeyRef:
-            name: cloudflare-creds
-            key: api-key
+        value: ${SECRET_CLOUDFLARE_APKI_KEY}
     extraArgs:
       - --annotation-filter=external-dns/is-public in (true)
     policy: sync
