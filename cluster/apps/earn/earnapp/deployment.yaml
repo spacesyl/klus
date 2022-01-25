@@ -22,6 +22,7 @@ spec:
       containers:
       - name: earnapp
         image: fazalfarhan01/earnapp:lite
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "0.5"
