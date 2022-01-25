@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: earnapp
+  namespace: earn
+  labels:
+    app: earnapp
+spec:
+  selector:
+    matchLabels:
+      app: earnapp
+      tier: frontend
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: earnapp
+        tier: frontend
+    spec:
+      containers:
+      - name: earnapp
+        image: fazalfarhan01/earnapp:lite
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: 128Mi
+          requests:
+            cpu: "0.1"
+            memory: 16Mi
+        env:
+        - name: EARNAPP_UUID
+          value: 'sdk-node-fe01118babdb40429ee61d72733afba9'
