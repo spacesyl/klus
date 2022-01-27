@@ -19,3 +19,24 @@ spec:
   values:
     env:
       TZ: Europe/Paris
+    ingress:
+      main:
+        enabled: true
+        hosts:
+        - host: null.${CLUSTER_DOMAIN}
+          paths:
+          - path: /
+            pathType: Prefix
+        - host: null.pub.${CLUSTER_DOMAIN}
+          paths:
+          - path: /
+            pathType: Prefix
+        - host: null.home.${CLUSTER_DOMAIN}
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - null.${CLUSTER_DOMAIN}
+          - null.pub.${CLUSTER_DOMAIN}
+          - null.home.${CLUSTER_DOMAIN}
