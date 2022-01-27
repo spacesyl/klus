@@ -19,24 +19,23 @@ spec:
   values:
     env:
       TZ: Europe/Paris
+    service:
+      main:
+        type: ClusterIP
     ingress:
       main:
         enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns/is-public: true
         hosts:
-        - host: null.${CLUSTER_DOMAIN}
-          paths:
-          - path: /
-            pathType: Prefix
-        - host: null.pub.${CLUSTER_DOMAIN}
-          paths:
-          - path: /
-            pathType: Prefix
-        - host: null.home.${CLUSTER_DOMAIN}
-          paths:
-          - path: /
-            pathType: Prefix
+          - host: "nullserv.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
         tls:
-        - hosts:
-          - null.${CLUSTER_DOMAIN}
-          - null.pub.${CLUSTER_DOMAIN}
-          - null.home.${CLUSTER_DOMAIN}
+          - hosts:
+              - "nullserv.${SECRET_DOMAIN}"
+            secretName: "nullserv-tls"
