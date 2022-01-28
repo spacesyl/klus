@@ -15,6 +15,7 @@ spec:
         kind: HelmRepository
         name: openebs-charts
         namespace: flux-system
+      interval: 5m
   values:
     localprovisioner:
       enabled: false
