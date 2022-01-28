@@ -7,3 +7,5 @@ resources:
   - media.yaml
   - monitoring.yaml
   - earn.yaml
+  - openebs.yaml
+  
