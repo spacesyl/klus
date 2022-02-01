@@ -17,13 +17,3 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    localprovisioner:
-      enabled: false
-    jiva:
-      replicas: 2
-      enabled: true
-      openebsLocalpv:
-        enabled: true
-      localpv-provisioner:
-        openebsNDM:
-          enabled: true
