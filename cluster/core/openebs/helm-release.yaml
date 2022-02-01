@@ -21,3 +21,4 @@ spec:
       enabled: false
     jiva:
       replicas: 2
+      enabled: true
