@@ -22,3 +22,8 @@ spec:
     jiva:
       replicas: 2
       enabled: true
+      openebsLocalpv:
+        enabled: true
+      localpv-provisioner:
+        openebsNDM:
+          enabled: true
