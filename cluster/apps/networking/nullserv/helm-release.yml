@@ -30,7 +30,6 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          external-dns/is-public: true
         hosts:
           - host: "nullserv.${SECRET_DOMAIN}"
             paths:
@@ -40,3 +39,4 @@ spec:
           - hosts:
               - "nullserv.${SECRET_DOMAIN}"
             secretName: "nullserv-tls"
+
