@@ -21,22 +21,6 @@ spec:
       TZ: Europe/Paris
     service:
       main:
-        type: ClusterIP
-    ingress:
-      main:
-        enabled: true
-        ingressClassName: "traefik"
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-        hosts:
-          - host: "nullserv.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - "nullserv.${SECRET_DOMAIN}"
-            secretName: "nullserv-tls"
+        type: LoadBalancer
+        loadBalancerIP: 10.1.0.103
 
