@@ -25,8 +25,6 @@ spec:
         value: ${SECRET_CLOUDFLARE_EMAIL}
       - name: CF_API_KEY
         value: ${SECRET_CLOUDFLARE_APKI_KEY}
-    extraArgs:
-      - --annotation-filter=external-dns/is-public in (true)
     policy: sync
     sources:
       - ingress
