@@ -64,6 +64,8 @@ spec:
         - https://dns.digitale-gesellschaft.ch/dns-query
         - udp:208.67.220.220
         - udp:208.67.220.222
+        - tcp+udp:8.8.4.4
+        - tcp+udp:8.8.8.8
       conditional:
         mapping:
           ${SECRET_PRIVATE_DOMAIN}: udp:10.1.0.4
@@ -79,6 +81,7 @@ spec:
             - http://sysctl.org/cameleon/hosts
             - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
             - https://raw.githubusercontent.com/ookangzheng/dbl-oisd-nl/master/dbl.txt
+            - https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/black.list
           special:
             - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
         clientGroupsBlock:
