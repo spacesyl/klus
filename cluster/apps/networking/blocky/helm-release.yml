@@ -68,9 +68,9 @@ spec:
         - tcp+udp:8.8.8.8
       conditional:
         mapping:
-          ${SECRET_PRIVATE_DOMAIN}: udp:10.1.0.4
-          0.1.10.in-addr.arpa: udp:10.1.0.4
-          1.1.10.in-addr.arpa: udp:10.1.0.4
+          ${SECRET_PRIVATE_DOMAIN}: tcp+udp:10.1.0.4
+          0.1.10.in-addr.arpa: tcp+udp:10.1.0.4
+          1.1.10.in-addr.arpa: tcp+udp:10.1.0.4
       blocking:
         blackLists:
           ads:
