@@ -53,7 +53,7 @@ spec:
         memory: 275Mi
     config: |
       upstream:
-        externalResolvers:
+        default:
         - https://dns1.nextdns.io/4838af
         - https://dns2.nextdns.io/4838af
         - tcp-tls:4838af.dns1.nextdns.io:853
@@ -62,8 +62,8 @@ spec:
         - 80.241.218.68
         - tcp-tls:fdns1.dismail.de:853
         - https://dns.digitale-gesellschaft.ch/dns-query
-        - udp:208.67.220.220
-        - udp:208.67.220.222
+        - tcp+udp:208.67.220.220
+        - tcp+udp:208.67.220.222
         - tcp+udp:8.8.4.4
         - tcp+udp:8.8.8.8
       conditional:
