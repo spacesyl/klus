@@ -8,4 +8,5 @@ resources:
   - monitoring.yaml
   - earn.yaml
   - openebs.yaml
+  - auth.yaml
   
