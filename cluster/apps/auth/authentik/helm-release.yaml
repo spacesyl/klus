@@ -16,11 +16,9 @@ spec:
         name: authentik-charts
         namespace: flux-system
       interval: 5m
-
   dependsOn:
     - name: traefik
       namespace: networking
-
   values:
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
