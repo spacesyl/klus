@@ -47,8 +47,10 @@ spec:
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/postgresql
+        tag: 11.13.0-debian-10
     redis:
       enabled: true
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
+        tag: 6.2.5-debian-10
