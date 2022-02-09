@@ -22,7 +22,8 @@ spec:
   values:
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
-
+      postgresql:
+        password: "${SECRET_AUTHENTIK_PG_PASSWORD}"
     ingress:
       enabled: true
       ingressClassName: "traefik"
