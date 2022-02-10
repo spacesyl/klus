@@ -47,9 +47,11 @@ spec:
           secretName: "id-tls"
     postgresql:
       enabled: true
-      postgresqlUsername: authentik
-      postgresqlDatabase: authentik
-      postgresqlPassword: "${SECRET_AUTHENTIK_PG_PASSWORD}"
+      auth:
+        username: authentik
+        database: authentik
+        password: "${SECRET_AUTHENTIK_PG_PASSWORD}"
+        postgresPassword: "${SECRET_AUTHENTIK_PG_PASSWORD}"
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/postgresql
