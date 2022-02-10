@@ -23,6 +23,9 @@ spec:
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       postgresql:
+        host: "authentik-postgresql"
+        name: "authentik"
+        user: "authentik"
         password: "${SECRET_AUTHENTIK_PG_PASSWORD}"
     ingress:
       enabled: true
@@ -44,6 +47,8 @@ spec:
           secretName: "id-tls"
     postgresql:
       enabled: true
+      postgresqlUsername: authentik
+      postgresqlDatabase: authentik
       postgresqlPassword: "${SECRET_AUTHENTIK_PG_PASSWORD}"
       image:
         registry: ghcr.io
