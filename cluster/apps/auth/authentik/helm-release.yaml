@@ -51,11 +51,11 @@ spec:
         username: authentik
         database: authentik
         password: "${SECRET_AUTHENTIK_PG_PASSWORD}"
-        postgresPassword: "${SECRET_AUTHENTIK_PG_PASSWORD}"
+      postgresqlPassword: "${SECRET_AUTHENTIK_PG_PASSWORD}"
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/postgresql
-        tag: 11
+        tag: 14
     redis:
       enabled: true
       image:
