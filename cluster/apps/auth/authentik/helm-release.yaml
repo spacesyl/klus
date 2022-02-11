@@ -49,6 +49,8 @@ spec:
         - hosts:
             - "id.${SECRET_DOMAIN}"
           secretName: "id-tls"
+    env:
+      AK_ADMIN_PASS: ${SECRET_AUTHENTIK_ADMIN_PASSWORD}
     postgresql:
       enabled: true
       auth:
