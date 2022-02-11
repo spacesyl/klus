@@ -19,6 +19,10 @@ spec:
   dependsOn:
     - name: traefik
       namespace: networking
+    - name: metallb
+      namespace: metallb-system
+    - name: cert-manager
+      namespace: cert-manager
   values:
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
