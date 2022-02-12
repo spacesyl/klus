@@ -91,7 +91,6 @@ spec:
           default:
           - ads
           - special
-        blockType: 10.1.0.103
       logLevel: info
       httpPort: 4000
       clientLookup:
