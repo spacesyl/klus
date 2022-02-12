@@ -51,6 +51,9 @@ spec:
           secretName: "id-tls"
     env:
       AK_ADMIN_PASS: ${SECRET_AUTHENTIK_ADMIN_PASSWORD}
+      AUTHENTIK_DEFAULT_USER_CHANGE_NAME: false
+      AUTHENTIK_DEFAULT_USER_CHANGE_EMAIL: false
+      AUTHENTIK_DEFAULT_USER_CHANGE_USERNAME: false
     postgresql:
       enabled: true
       auth:
