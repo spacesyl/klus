@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mariadb
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: mariadb
+      version: 10.3.3
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami-charts
+        namespace: flux-system
+      interval: 5m
+  dependsOn:
+    - name: metallb
+      namespace: metallb-system
+  values:
+    env:
+      TZ: Europe/Paris
+    image:
+      registry: ghcr.io
+      repository: zcube/bitnami-compat/mariadb
+      tag: 10.5
+    auth:
+      database: ${SECRET_BLOCKY_DB}
+      username: ${SECRET_BLOCKY_DB_USER}
+      password: ${SECRET_BLOCKY_DB_PASSWORD}
