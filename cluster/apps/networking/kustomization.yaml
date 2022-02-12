@@ -4,3 +4,4 @@ resources:
   - traefik
   - blocky
   - external-dns
+  - chrony
