@@ -30,3 +30,6 @@ spec:
       database: ${SECRET_BLOCKY_DB}
       username: ${SECRET_BLOCKY_DB_USER}
       password: ${SECRET_BLOCKY_DB_PASSWORD}
+    primary:
+      persistence:
+        storageClass: openebs-jiva-csi-default
