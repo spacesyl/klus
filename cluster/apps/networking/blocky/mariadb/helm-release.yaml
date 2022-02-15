@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: mariadb-blocky
+  name: blocky-mariadb
   namespace: networking
 spec:
   interval: 5m
