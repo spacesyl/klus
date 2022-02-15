@@ -21,5 +21,3 @@ spec:
       TZ: Europe/Paris
     jiva:
       enabled: true
-    localprovisioner:
-      enabled: false
