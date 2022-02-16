@@ -68,10 +68,12 @@ spec:
       persistence:
         enabled: true
         storageClass: openebs-jiva-csi-default
-          
     redis:
       enabled: true
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
         tag: 6.2
+      persistence:
+        enabled: false
+
