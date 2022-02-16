@@ -74,6 +74,3 @@ spec:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
         tag: 6.2
-      persistence:
-        enabled: false
-
