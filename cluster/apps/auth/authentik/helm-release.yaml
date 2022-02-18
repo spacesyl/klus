@@ -64,7 +64,7 @@ spec:
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/postgresql
-        tag: 13
+        tag: 14
       persistence:
         enabled: true
         storageClass: openebs-jiva-csi-default
