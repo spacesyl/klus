@@ -9,4 +9,5 @@ resources:
   - earn.yaml
   - openebs.yaml
   - auth.yaml
+  - data.yaml
   
