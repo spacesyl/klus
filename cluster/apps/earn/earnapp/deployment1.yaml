@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: earnapp
+  name: earnapp1
   namespace: earn
   labels:
     app: earnapp
