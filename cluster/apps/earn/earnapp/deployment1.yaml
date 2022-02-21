@@ -4,11 +4,11 @@ metadata:
   name: earnapp1
   namespace: earn
   labels:
-    app: earnapp
+    app: earnapp1
 spec:
   selector:
     matchLabels:
-      app: earnapp
+      app: earnapp1
       tier: frontend
   replicas: 1
   strategy:
@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       labels:
-        app: earnapp
+        app: earnapp1
         tier: frontend
     spec:
       containers:
