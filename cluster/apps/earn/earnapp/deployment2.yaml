@@ -32,4 +32,4 @@ spec:
             memory: 16Mi
         env:
         - name: EARNAPP_UUID
-          value: 'sdk-node-fe01118babdb40429ee61d72733afba9'
+          value: ${SECRET_EARNAPP_2}
