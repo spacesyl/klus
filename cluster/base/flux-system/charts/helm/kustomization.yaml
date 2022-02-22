@@ -26,3 +26,4 @@ resources:
   - weaveworks-kured-charts.yaml
   - longhorn-charts.yaml
   - openebs-charts.yaml
+  - runix-charts.yaml
