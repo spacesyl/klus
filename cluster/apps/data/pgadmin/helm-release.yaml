@@ -31,6 +31,7 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: networking-buffering-medium@kubernetescrd
         cert-manager.io/cluster-issuer: "letsencrypt-production"
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hosts:
         - host: "pgadmin.${SECRET_DOMAIN}"
           paths:
