@@ -38,13 +38,13 @@ spec:
       dns-tcp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: 10.1.0.101
+        loadBalancerIP: "${METALLB_BLOCKY_ADDR}"
         annotations:
           metallb.universe.tf/allow-shared-ip: blocky
       dns-udp:
         enabled: true
         type: LoadBalancer
-        loadBalancerIP: 10.1.0.101
+        loadBalancerIP: "${METALLB_BLOCKY_ADDR}"
         annotations:
           metallb.universe.tf/allow-shared-ip: blocky
     resources:

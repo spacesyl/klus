@@ -16,4 +16,4 @@ spec:
     app: chrony
     tier: frontend
   type: LoadBalancer
-  loadBalancerIP: 10.1.0.102
+  loadBalancerIP: "${METALLB_CHRONY_ADDR}"

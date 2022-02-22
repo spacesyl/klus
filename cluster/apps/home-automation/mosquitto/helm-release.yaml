@@ -23,8 +23,7 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs: 
-          - 10.1.0.104
+        loadBalancerIP: "${METALLB_MQTT_ADDR}"
         externalTrafficPolicy: Local
     persistence:
       data:
