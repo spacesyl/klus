@@ -23,7 +23,9 @@ spec:
 
     strategy:
       type: Recreate
-
+    persistentVolume:
+      enabled: true
+      storageClass: local-path
     ingress:
       enabled: true
       ingressClassName: "traefik"
