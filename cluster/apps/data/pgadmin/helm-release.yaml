@@ -26,6 +26,8 @@ spec:
     persistentVolume:
       enabled: true
       storageClass: local-path
+    VolumePermissions:
+      enabled: true
     ingress:
       enabled: true
       ingressClassName: "traefik"
