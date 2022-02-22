@@ -40,13 +40,3 @@ spec:
         - hosts:
             - "pgadmin.${SECRET_CLUSTER_DOMAIN}"
           secretName: "pgadmin-tls"
-  postRenderers:
-    - kustomize:
-        patchesJson6902:
-          - target:
-              kind: Ingress
-              name: pgadmin-pgadmin4
-            patch:
-              - op: add
-                path: /spec/ingressClassName
-                value: traefik
