@@ -26,6 +26,7 @@ spec:
 
     ingress:
       enabled: true
+      ingressClassName: "traefik"
       annotations:
         traefik.ingress.kubernetes.io/router.middlewares: networking-buffering-medium@kubernetescrd
         cert-manager.io/cluster-issuer: "letsencrypt-production"
