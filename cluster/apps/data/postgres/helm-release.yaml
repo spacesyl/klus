@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: postgresql
-      version: 10.16.2
+      version: 11.0.8
       sourceRef:
         kind: HelmRepository
         name: bitnami-charts
@@ -31,3 +31,6 @@ spec:
       pullPolicy: IfNotPresent
     postgresqlUsername: ${SECRET_POSTGRESQL_KUBE_POSTGRES_USER}
     postgresqlPassword: ${SECRET_POSTGRESQL_KUBE_POSTGRES_PASSWORD}
+    persistence:
+      enabled: true
+      storageClass: openebs-jiva-csi-default
