@@ -31,6 +31,10 @@ spec:
       pullPolicy: IfNotPresent
     postgresqlUsername: ${SECRET_POSTGRESQL_KUBE_POSTGRES_USER}
     postgresqlPassword: ${SECRET_POSTGRESQL_KUBE_POSTGRES_PASSWORD}
+    auth:
+      username: authentik
+      database: authentik
+      password: "${SECRET_AUTHENTIK_PG_PASSWORD}"
     persistence:
       enabled: true
       storageClass: openebs-jiva-csi-default
