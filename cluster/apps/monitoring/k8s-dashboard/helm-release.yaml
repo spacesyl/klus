@@ -31,3 +31,19 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    ingress:
+      enabled: true
+      ingressClassName: "traefik"
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      hosts:
+      - host: "kash.${SECRET_DOMAIN}"
+        paths:
+        - path: "/"
+          pathType: Prefix
+      tls:
+        - hosts:
+            - "kash.${SECRET_DOMAIN}"
+          secretName: "kash-tls"
