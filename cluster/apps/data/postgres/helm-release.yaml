@@ -27,7 +27,7 @@ spec:
     image:
       registry: ghcr.io
       repository: zcube/bitnami-compat/postgresql
-      tag: 11
+      tag: 14
       pullPolicy: IfNotPresent
     postgresqlUsername: ${SECRET_POSTGRESQL_KUBE_POSTGRES_USER}
     postgresqlPassword: ${SECRET_POSTGRESQL_KUBE_POSTGRES_PASSWORD}
