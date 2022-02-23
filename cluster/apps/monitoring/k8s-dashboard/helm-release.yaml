@@ -39,11 +39,9 @@ spec:
         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
         external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
       hosts:
-      - host: "kash.${SECRET_DOMAIN}"
-        paths:
-        - path: "/"
-          pathType: Prefix
+        - "kash.${SECRET_DOMAIN}"
       tls:
-        - hosts:
-            - "kash.${SECRET_DOMAIN}"
-          secretName: "kash-tls"
+        - secretName: "kash-tls"
+          hosts:
+              - "kash.${SECRET_DOMAIN}"
+          
