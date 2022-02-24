@@ -7,6 +7,6 @@ resources:
   - system-upgrade
   - earn
   - auth
-  - data
+#  - data
   - home-automation
   - monitoring
