@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://portainer.github.io/k8s/
-      chart: kubernetes-dashboard
+      chart: portainer
       version: 1.0.22
       sourceRef:
         kind: HelmRepository
