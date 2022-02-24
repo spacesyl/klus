@@ -47,4 +47,5 @@ spec:
         - hosts:
             - "portainer.${SECRET_DOMAIN}"
           secretName: "portainer-tls"
-          
+    service:
+      type: ClusterIP
