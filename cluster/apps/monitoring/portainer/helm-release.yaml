@@ -31,6 +31,8 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    image:
+      tag: 2.11.1-alpine
     ingress:
       enabled: true
       ingressClassName: "traefik"
