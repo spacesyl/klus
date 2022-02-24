@@ -49,3 +49,5 @@ spec:
           secretName: "portainer-tls"
     service:
       type: ClusterIP
+    persistence:
+      storageClass: openebs-jiva-csi-default
