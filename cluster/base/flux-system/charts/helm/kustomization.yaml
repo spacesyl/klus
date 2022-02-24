@@ -28,3 +28,4 @@ resources:
   - openebs-charts.yaml
   - runix-charts.yaml
   - kubernetes-dashboard-charts.yaml
+  - portainer-charts.yaml
