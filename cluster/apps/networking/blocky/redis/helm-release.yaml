@@ -23,6 +23,9 @@ spec:
       registry: ghcr.io
       repository: zcube/bitnami-compat/redis
       tag: 6.2
+    master:
+      persistence:
+        enabled: false
     replica:
       replicaCount: 2
       persistence:
