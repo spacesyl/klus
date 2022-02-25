@@ -20,6 +20,8 @@ spec:
     - name: metallb
       namespace: metallb-system
   values:
+    image:
+      tag: v0.18
     env:
       TZ: Europe/Paris
     controller:
