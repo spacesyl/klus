@@ -104,9 +104,9 @@ spec:
       #   type: mysql
       #   target: ${SECRET_BLOCKY_DB_USER}:${SECRET_BLOCKY_DB_PASSWORD}@tcp(blocky-mariadb:3306)/${SECRET_BLOCKY_DB}?charset=utf8mb4&parseTime=True&loc=Local
       #   logRetentionDays: 7
-      # redis:
-      #   address: blocky-redis-master
-      #   required: true
+      redis:
+        address: blocky-redis-master
+        required: true
     podAnnotations:
       configmap.reloader.stakater.com/reload: "blocky-config"
     # metrics:
