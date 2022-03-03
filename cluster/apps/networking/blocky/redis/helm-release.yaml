@@ -43,3 +43,9 @@ spec:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis-sentinel
         tag: 6.2
+    metrics:
+      enabled: True
+      image:
+        registry: ghcr.io
+        repository: zcube/bitnami-compat/redis-exporter
+        tag: 1
