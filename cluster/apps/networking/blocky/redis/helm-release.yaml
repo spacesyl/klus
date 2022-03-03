@@ -27,8 +27,15 @@ spec:
       persistence:
         enabled: false
     replica:
-      replicaCount: 0
+      replicaCount: 2
       persistence:
         enabled: false
     auth:
       enabled: false
+      sentinel: false
+    sentinel:
+      enabled: True
+      image:
+        registry: ghcr.io
+        repository: zcube/bitnami-compat/redis-sentinel
+        tag: 6.2
