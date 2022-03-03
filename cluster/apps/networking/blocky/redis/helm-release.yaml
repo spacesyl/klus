@@ -30,6 +30,10 @@ spec:
       replicaCount: 2
       persistence:
         enabled: false
+      autoscaling:
+        enabled: True
+        targetCPU: 50
+        targetMemory: 50
     auth:
       enabled: false
       sentinel: false
