@@ -56,7 +56,7 @@ spec:
         memory: 250Mi
     autoscaling:
       enabled: True
-      target:  blocky-hpa
+      target:  blocky
       minReplicas:  1
       maxReplicas:  4
       targetCPUUtilizationPercentage:  75
