@@ -49,18 +49,18 @@ spec:
           metallb.universe.tf/allow-shared-ip: blocky
     resources:
       limits:
-        cpu: 250m
+        cpu: 1
         memory: 500Mi
       requests:
-        cpu: 50m
+        cpu: 250m
         memory: 250Mi
     autoscaling:
       enabled: True
       target:  blocky
       minReplicas:  1
       maxReplicas:  4
-      targetCPUUtilizationPercentage:  75
-      targetMemoryUtilizationPercentage:  75
+      targetCPUUtilizationPercentage:  80
+      targetMemoryUtilizationPercentage:  90
     config: |
       upstream:
         default:
