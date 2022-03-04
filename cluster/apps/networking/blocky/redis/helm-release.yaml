@@ -34,6 +34,13 @@ spec:
         enabled: True
         targetCPU: 50
         targetMemory: 50
+      resources:
+        requests:
+          cpu: 250m
+          memory: 16Mi
+        limits:
+          cpu: 500m
+          memory: 32Mi
     auth:
       enabled: false
       sentinel: false
@@ -44,7 +51,7 @@ spec:
         repository: zcube/bitnami-compat/redis-sentinel
         tag: 6.2
     metrics:
-      enabled: True
+      enabled: false
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis-exporter
