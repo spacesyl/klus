@@ -23,7 +23,7 @@ spec:
     env:
       TZ: Europe/Paris
     controller:
-      replicas: 3
+      replicas: 1
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -54,6 +54,13 @@ spec:
       requests:
         cpu: 50m
         memory: 250Mi
+    autoscaling:
+      enabled: True
+      target:  blocky-hpa
+      minReplicas:  1
+      maxReplicas:  4
+      targetCPUUtilizationPercentage:  75
+      targetMemoryUtilizationPercentage:  75
     config: |
       upstream:
         default:
