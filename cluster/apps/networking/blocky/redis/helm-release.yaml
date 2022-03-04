@@ -34,7 +34,7 @@ spec:
           cpu: 500m
           memory: 32Mi
     replica:
-      replicaCount: 2
+      replicaCount: 1
       persistence:
         enabled: false
       autoscaling:
