@@ -8,5 +8,5 @@ resources:
   - earn
 #  - auth
 #  - data
-  - home-automation
-  - monitoring
+#  - home-automation
+#  - monitoring
