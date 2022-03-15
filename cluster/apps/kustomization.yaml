@@ -9,4 +9,4 @@ resources:
 #  - auth
 #  - data
 #  - home-automation
-#  - monitoring
+  - monitoring
