@@ -40,7 +40,7 @@ spec:
       autoscaling:
         enabled: True
         targetCPU: 50
-        targetMemory: 50
+        targetMemory: 75
       resources:
         requests:
           cpu: 250m
