@@ -58,7 +58,7 @@ spec:
       enabled: True
       target:  blocky
       minReplicas:  1
-      maxReplicas:  4
+      maxReplicas:  3
       targetCPUUtilizationPercentage:  80
       targetMemoryUtilizationPercentage:  90
     config: |
