@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: earnapp
-        image: fazalfarhan01/earnapp:lite
+        image: fazalfarhan01/earnapp:lite-1.290.161
         imagePullPolicy: Always
         resources:
           limits:
