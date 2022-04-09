@@ -19,6 +19,7 @@ spec:
         app: earnapp1
         tier: frontend
     spec:
+      # renovate: registryUrl=https://github.com/Arno05/EarnApp-Docker
       containers:
       - name: earnapp
         image: arno05/earnapp:lite-1.291.851
