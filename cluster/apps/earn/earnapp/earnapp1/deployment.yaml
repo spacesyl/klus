@@ -22,7 +22,7 @@ spec:
       # renovate: registryUrl=https://github.com/Arno05/EarnApp-Docker
       containers:
       - name: earnapp
-        image: arno05/earnapp:lite-1.291.851
+        image: arno05/earnapp:lite-1.290.161
         imagePullPolicy: Always
         resources:
           limits:
