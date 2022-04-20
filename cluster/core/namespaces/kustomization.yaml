@@ -11,4 +11,4 @@ resources:
   - openebs.yaml
   - auth.yaml
   - data.yaml
-  
+  - system-upgrade.yaml
