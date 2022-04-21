@@ -79,6 +79,7 @@ spec:
       conditional:
         mapping:
           ${SECRET_PRIVATE_DOMAIN}: tcp+udp:10.1.0.4
+          ${SECRET_DOMAIN}: tcp+udp:k8s-gateway
           0.1.10.in-addr.arpa: tcp+udp:10.1.0.4
           1.1.10.in-addr.arpa: tcp+udp:10.1.0.4
       blocking:
