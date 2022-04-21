@@ -8,4 +8,4 @@ resources:
   - blocky
   - external-dns
   - chrony
-  - whoogle
+  - searx
