@@ -24,8 +24,6 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
-    image:
-      tag: 2022.3.3
     authentik:
       secret_key: "${SECRET_AUTHENTIK_SECRET_KEY}"
       postgresql:
