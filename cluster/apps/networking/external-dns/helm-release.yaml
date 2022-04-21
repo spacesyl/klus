@@ -31,7 +31,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: external-dns-cloud-credentials
-            key: apikey
+            key: api-key
     extraArgs:
       - --cloudflare-proxied
       - --annotation-filter=external-dns/is-public in (true)
