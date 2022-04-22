@@ -26,3 +26,6 @@ spec:
       endTime: "4:00"
       timeZone: "Europe/Paris"
       rebootCommand: "/usr/bin/systemctl reboot"
+    tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
