@@ -44,6 +44,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "magnify"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          external-dns/is-public: "true"          
         hosts:
           - host: "search.${SECRET_DOMAIN}"
             paths:
