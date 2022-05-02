@@ -31,7 +31,7 @@ Feel free to read up on any of these technologies before you get started to be m
 - [metallb](https://metallb.universe.tf/) - bare metal load balancer
 - [reloader](https://github.com/stakater/Reloader) - restart pods when Kubernetes `configmap` or `secret` changes
 - [reflector](https://github.com/emberstack/kubernetes-reflector) - mirror `configmap`s or `secret`s to other Kubernetes namespaces
-- [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller) - automate upgrading k3s
+- [system-upgrade-controller](https://github.com/rancher/system-upgrade-controller) - (opt-in) automate upgrading k3s
 - [traefik](https://traefik.io) - ingress controller
 
 For provisioning the following tools will be used:
@@ -42,9 +42,13 @@ For provisioning the following tools will be used:
 
 ## 📝 Prerequisites
 
+**Note:** This template has not been tested on cloud providers like AWS EC2, Hetzner, Scaleway etc... Those cloud offerings probably have a better way of provsioning a Kubernetes cluster and it's advisable to use those instead of the Ansible playbooks included here. This repository can still be used for the GitOps/Flux portion if there's a cluster working in one those environments.
+
 ### 💻 Systems
 
-- One or more nodes with a fresh install of [Ubuntu Server 22.04](https://ubuntu.com/download/server). These nodes can be bare metal or VMs.
+- One or more nodes with a fresh install of [Ubuntu Server 22.04](https://ubuntu.com/download/server).
+  - These nodes can be bare metal or VMs.
+  - An odd number of control plane nodes, greater than or equal to 3 is required if deploying more than one control plane node.
 - A [Cloudflare](https://www.cloudflare.com/) account with a domain, this will be managed by Terraform.
 - Some experience in debugging problems and a positive attitude ;)
 
@@ -89,16 +93,20 @@ After pre-commit is installed on your machine run:
 ```sh
 task pre-commit:init
 ```
+
 **Remember to run this on each new clone of the repository for it to have effect.**
 
 Commands are of interest, for learning purposes:
 
 This command makes it so pre-commit runs on `git commit`, and also installs environments per the config file.
-```
+
+```sh
 pre-commit install --install-hooks
 ```
+
 This command checks for new versions of hooks, though it will occasionally make mistakes, so verify its results.
-```
+
+```sh
 pre-commit autoupdate
 ```
 
@@ -131,7 +139,7 @@ cluster
     └── traefik
 ```
 
-## 🚀 Lets go!
+## 🚀 Lets go
 
 Very first step will be to create a new repository by clicking the **Use this template** button on this page.
 
@@ -145,23 +153,23 @@ Clone the repo to you local workstation and `cd` into it.
 
 1. Create a Age Private / Public Key
 
-```sh
-age-keygen -o age.agekey
-```
+    ```sh
+    age-keygen -o age.agekey
+    ```
 
 2. Set up the directory for the Age key and move the Age file to it
 
-```sh
-mkdir -p ~/.config/sops/age
-mv age.agekey ~/.config/sops/age/keys.txt
-```
+    ```sh
+    mkdir -p ~/.config/sops/age
+    mv age.agekey ~/.config/sops/age/keys.txt
+    ```
 
 3. Export the `SOPS_AGE_KEY_FILE` variable in your `bashrc`, `zshrc` or `config.fish` and source it, e.g.
 
-```sh
-export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
-source ~/.bashrc
-```
+    ```sh
+    export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
+    source ~/.bashrc
+    ```
 
 4. Fill out the Age public key in the `.config.env` under `BOOTSTRAP_AGE_PUBLIC_KEY`, **note** the public key should start with `age`...
 
@@ -193,7 +201,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 📍 Nodes are not security hardened by default, you can do this with [dev-sec/ansible-collection-hardening](https://github.com/dev-sec/ansible-collection-hardening) or something similar.
 
-1. Ensure you are able to SSH into you nodes from your workstation with using your private ssh key. This is how Ansible is able to connect to your remote nodes.
+1. Ensure you are able to SSH into your nodes from your workstation using your private ssh key. This is how Ansible is able to connect to your remote nodes. [How to configure SSH key-based authentication](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
 
 2. Install the deps by running `task ansible:deps`
 
@@ -219,12 +227,12 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 5. Verify the nodes are online
 
-```sh
-kubectl --kubeconfig=./provision/kubeconfig get nodes
-# NAME           STATUS   ROLES                       AGE     VERSION
-# k8s-0          Ready    control-plane,master      4d20h   v1.21.5+k3s1
-# k8s-1          Ready    worker                    4d20h   v1.21.5+k3s1
-```
+    ```sh
+    kubectl --kubeconfig=./provision/kubeconfig get nodes
+    # NAME           STATUS   ROLES                       AGE     VERSION
+    # k8s-0          Ready    control-plane,master      4d20h   v1.21.5+k3s1
+    # k8s-1          Ready    worker                    4d20h   v1.21.5+k3s1
+    ```
 
 ### ☁️ Configuring Cloudflare DNS with Terraform
 
@@ -244,70 +252,70 @@ If Terraform was ran successfully you can log into Cloudflare and validate the D
 
 1. Verify Flux can be installed
 
-```sh
-flux --kubeconfig=./provision/kubeconfig check --pre
-# ► checking prerequisites
-# ✔ kubectl 1.21.5 >=1.18.0-0
-# ✔ Kubernetes 1.21.5+k3s1 >=1.16.0-0
-# ✔ prerequisites checks passed
-```
+    ```sh
+    flux --kubeconfig=./provision/kubeconfig check --pre
+    # ► checking prerequisites
+    # ✔ kubectl 1.21.5 >=1.18.0-0
+    # ✔ Kubernetes 1.21.5+k3s1 >=1.16.0-0
+    # ✔ prerequisites checks passed
+    ```
 
 2. Pre-create the `flux-system` namespace
 
-```sh
-kubectl --kubeconfig=./provision/kubeconfig create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig=./provision/kubeconfig apply -f -
-```
+    ```sh
+    kubectl --kubeconfig=./provision/kubeconfig create namespace flux-system --dry-run=client -o yaml | kubectl --kubeconfig=./provision/kubeconfig apply -f -
+    ```
 
 3. Add the Age key in-order for Flux to decrypt SOPS secrets
 
-```sh
-cat ~/.config/sops/age/keys.txt |
-    kubectl --kubeconfig=./provision/kubeconfig \
-    -n flux-system create secret generic sops-age \
-    --from-file=age.agekey=/dev/stdin
-```
+    ```sh
+    cat ~/.config/sops/age/keys.txt |
+        kubectl --kubeconfig=./provision/kubeconfig \
+        -n flux-system create secret generic sops-age \
+        --from-file=age.agekey=/dev/stdin
+    ```
 
-📍 Variables defined in `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster`
+    📍 Variables defined in `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster`
 
 4. **Verify** the `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/core/cert-manager/secret.sops.yaml` files are **encrypted** with SOPS
 
 5. If you verified all the secrets are encrypted, you can delete the `tmpl` directory now
 
-6.  Push you changes to git
+6. Push you changes to git
 
-```sh
-git add -A
-git commit -m "initial commit"
-git push
-```
+    ```sh
+    git add -A
+    git commit -m "initial commit"
+    git push
+    ```
 
 7. Install Flux
 
-📍 Due to race conditions with the Flux CRDs you will have to run the below command twice. There should be no errors on this second run.
+    📍 Due to race conditions with the Flux CRDs you will have to run the below command twice. There should be no errors on this second run.
 
-```sh
-kubectl --kubeconfig=./provision/kubeconfig apply --kustomize=./cluster/base/flux-system
-# namespace/flux-system configured
-# customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io created
-# ...
-# unable to recognize "./cluster/base/flux-system": no matches for kind "Kustomization" in version "kustomize.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "GitRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-# unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
-```
+    ```sh
+    kubectl --kubeconfig=./provision/kubeconfig apply --kustomize=./cluster/base/flux-system
+    # namespace/flux-system configured
+    # customresourcedefinition.apiextensions.k8s.io/alerts.notification.toolkit.fluxcd.io created
+    # ...
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "Kustomization" in version "kustomize.toolkit.fluxcd.io/v1beta1"
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "GitRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+    # unable to recognize "./cluster/base/flux-system": no matches for kind "HelmRepository" in version "source.toolkit.fluxcd.io/v1beta1"
+    ```
 
 8. Verify Flux components are running in the cluster
 
-```sh
-kubectl --kubeconfig=./provision/kubeconfig get pods -n flux-system
-# NAME                                       READY   STATUS    RESTARTS   AGE
-# helm-controller-5bbd94c75-89sb4            1/1     Running   0          1h
-# kustomize-controller-7b67b6b77d-nqc67      1/1     Running   0          1h
-# notification-controller-7c46575844-k4bvr   1/1     Running   0          1h
-# source-controller-7d6875bcb4-zqw9f         1/1     Running   0          1h
-```
+    ```sh
+    kubectl --kubeconfig=./provision/kubeconfig get pods -n flux-system
+    # NAME                                       READY   STATUS    RESTARTS   AGE
+    # helm-controller-5bbd94c75-89sb4            1/1     Running   0          1h
+    # kustomize-controller-7b67b6b77d-nqc67      1/1     Running   0          1h
+    # notification-controller-7c46575844-k4bvr   1/1     Running   0          1h
+    # source-controller-7d6875bcb4-zqw9f         1/1     Running   0          1h
+    ```
 
 🎉 **Congratulations** if all goes smooth you'll have a Kubernetes cluster managed by Flux, your Git repository is driving the state of your cluster.
 
@@ -335,26 +343,34 @@ Our [wiki](https://github.com/k8s-at-home/template-cluster-k3s/wiki) (WIP, contr
 
 You may also open a issue on this GitHub repo or open a [discussion on GitHub](https://github.com/k8s-at-home/organization/discussions).
 
-### 🤖 Integrations
+## ❔ What's next
+
+The world is your cluster, see below for important things you could work on adding.
+
+### 🤖 Renovatebot
+
+[Renovatebot](https://www.whitesourcesoftware.com/free-developer-tools/renovate/) will scan your repository and offer PRs when it finds dependencies out of date. Common dependencies it will discover and update are Flux, Ansible Galaxy Roles, Terraform Providers, Kubernetes Helm Charts, Kubernetes Container Images, Pre-commit hooks updates, and more!
+
+The base Renovate configuration provided in your repository can be view at [.github/renovate.json5](https://github.com/k8s-at-home/template-cluster-k3s/blob/main/.github/renovate.json5). If you notice this only runs on weekends and you can [change the schedule to anything you want](https://docs.renovatebot.com/presets-schedule/) or simply remove it.
+
+To enable Renovate on your repository, click the 'Configure' button over at their [Github app page](https://github.com/apps/renovate) and choose your repository. Over time Renovate will create PRs for out-of-date dependencies it finds. Any merged PRs that are in the cluster directory Flux will deploy.
 
 Our Check out our [wiki](https://github.com/k8s-at-home/template-cluster-k3s/wiki) (WIP, contributions welcome) for more integrations!
 
-## ❔ What's next
-
-The world is your cluster and the first thing you might want to do is to have storage backed by something other than local disk.
+### 💾 Storage
 
 In no particular order, here are some popular storage related items you could install and use in your cluster:
 
-* [rook-ceph](https://github.com/rook/rook)
-* [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
-* [democratic-csi](https://github.com/democratic-csi/democratic-csi)
-* [csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs)
-* [longhorn](https://github.com/longhorn/longhorn)
-
-Community member @Whazor created [this website](https://whazor.github.io/k8s-at-home-search/) as a means to search Helm Releases across GitHub. You may use it as a means to get ideas on how to configure an applications' Helm values.
-
-Many people have shared their awesome repositories over at [awesome-home-kubernetes](https://github.com/k8s-at-home/awesome-home-kubernetes).
+- [rook-ceph](https://github.com/rook/rook)
+- [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
+- [democratic-csi](https://github.com/democratic-csi/democratic-csi)
+- [csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs)
+- [longhorn](https://github.com/longhorn/longhorn)
 
 ## 🤝 Thanks
 
 Big shout out to all the authors and contributors to the projects that we are using in this repository.
+
+Community member @Whazor created [this website](https://whazor.github.io/k8s-at-home-search/) as a means to search Helm Releases across GitHub. You may use it as a means to get ideas on how to configure an applications' Helm values.
+
+Many people have shared their awesome repositories over at [awesome-home-kubernetes](https://github.com/k8s-at-home/awesome-home-kubernetes).
