@@ -69,6 +69,7 @@ For provisioning the following tools will be used:
 | [go-task](https://github.com/go-task/task)         | A task runner / simpler Make alternative written in Go                                                                                  |
 | [ipcalc](http://jodies.de/ipcalc)                  | Used to verify settings in the configure script                                                                                         |
 | [jq](https://stedolan.github.io/jq/)               | Used to verify settings in the configure script                                                                                         |
+| [yq](https://github.com/mikefarah/yq)              | Used to verify settings in the configure script                                                                                         |
 | [kubectl](https://kubernetes.io/docs/tasks/tools/) | Allows you to run commands against Kubernetes clusters                                                                                  |
 | [sops](https://github.com/mozilla/sops)            | Encrypts k8s secrets with Age                                                                                                           |
 | [terraform](https://www.terraform.io)              | Prepare a Cloudflare domain to be used with the cluster                                                                                 |
@@ -337,7 +338,57 @@ To access services from the outside world port forwarded `80` and `443` in your 
 
 Now if nothing is working, that is expected. This is DNS after all!
 
-### 👉 Troubleshooting
+### 🤖 Renovatebot
+
+[Renovatebot](https://www.whitesourcesoftware.com/free-developer-tools/renovate/) will scan your repository and offer PRs when it finds dependencies out of date. Common dependencies it will discover and update are Flux, Ansible Galaxy Roles, Terraform Providers, Kubernetes Helm Charts, Kubernetes Container Images, Pre-commit hooks updates, and more!
+
+The base Renovate configuration provided in your repository can be view at [.github/renovate.json5](https://github.com/k8s-at-home/template-cluster-k3s/blob/main/.github/renovate.json5). If you notice this only runs on weekends and you can [change the schedule to anything you want](https://docs.renovatebot.com/presets-schedule/) or simply remove it.
+
+To enable Renovate on your repository, click the 'Configure' button over at their [Github app page](https://github.com/apps/renovate) and choose your repository. Over time Renovate will create PRs for out-of-date dependencies it finds. Any merged PRs that are in the cluster directory Flux will deploy.
+
+### 🪝 Github Webhook
+
+Flux is pull-based by design meaning it will periodically check your git repository for changes, using a webhook you can enable Flux to update your cluster on `git push`. In order to configure Github to send `push` events from your repository to the Flux webhook receiver you will need two things:
+
+1. Webhook URL
+    Your webhook receiver will be deployed on `https://flux-receiver.${BOOTSTRAP_CLOUDFLARE_DOMAIN}/hook/:hookId`. In order to find out your hook id you can run the following command:
+
+    ```sh
+    kubectl -n flux-system get receiver/github-receiver --kubeconfig=./provision/kubeconfig
+    # NAME              AGE    READY   STATUS
+    # github-receiver   6h8m   True    Receiver initialized with URL: /hook/12ebd1e363c641dc3c2e430ecf3cee2b3c7a5ac9e1234506f6f5f3ce1230e123
+    ```
+
+    So if my domain was `k8s-at-home.com` the full url would look like this:
+
+    ```text
+    https://flux-receiver.k8s-at-home.com/hook/12ebd1e363c641dc3c2e430ecf3cee2b3c7a5ac9e1234506f6f5f3ce1230e123
+    ```
+
+2. Webhook secret
+    Your webhook secret can be found by decrypting the `secret.sops.yaml` using the following command:
+
+    ```sh
+    sops -d ./cluster/apps/flux-system/webhooks/github/secret.sops.yaml | yq .stringData.token
+    ```
+
+    **Note:** Don't forget to update the `BOOTSTRAP_FLUX_GITHUB_WEBHOOK_SECRET` variable in your `.config.env` file so it matches the generated secret if applicable
+
+Now that you have the webhook url and secret, it's time to set everything up on the Github repository side. Navigate to the settings of your repository on Github, under "Settings/Webhooks" press the "Add webhook" button. Fill in the webhook url and your secret.
+
+### 💾 Storage
+
+Rancher's `local-path-provisioner` is a great start for storage but soon you might find you need more features like replicated block storage, or to connect to a NFS/SMB/iSCSI server. Check out the projects below to read up more on some storage solutions that might work for you.
+
+- [rook-ceph](https://github.com/rook/rook)
+- [longhorn](https://github.com/longhorn/longhorn)
+- [openebs](https://github.com/openebs/openebs)
+- [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
+- [democratic-csi](https://github.com/democratic-csi/democratic-csi)
+- [csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs)
+- [synology-csi](https://github.com/SynologyOpenSource/synology-csi)
+
+## 👉 Troubleshooting
 
 Our [wiki](https://github.com/k8s-at-home/template-cluster-k3s/wiki) (WIP, contributions welcome) is a good place to start troubleshooting issues. If that doesn't cover your issue, come join and say Hi in our [Discord](https://discord.gg/k8s-at-home) server by starting a new thread in the #kubernetes support channel.
 
@@ -347,25 +398,7 @@ You may also open a issue on this GitHub repo or open a [discussion on GitHub](h
 
 The world is your cluster, see below for important things you could work on adding.
 
-### 🤖 Renovatebot
-
-[Renovatebot](https://www.whitesourcesoftware.com/free-developer-tools/renovate/) will scan your repository and offer PRs when it finds dependencies out of date. Common dependencies it will discover and update are Flux, Ansible Galaxy Roles, Terraform Providers, Kubernetes Helm Charts, Kubernetes Container Images, Pre-commit hooks updates, and more!
-
-The base Renovate configuration provided in your repository can be view at [.github/renovate.json5](https://github.com/k8s-at-home/template-cluster-k3s/blob/main/.github/renovate.json5). If you notice this only runs on weekends and you can [change the schedule to anything you want](https://docs.renovatebot.com/presets-schedule/) or simply remove it.
-
-To enable Renovate on your repository, click the 'Configure' button over at their [Github app page](https://github.com/apps/renovate) and choose your repository. Over time Renovate will create PRs for out-of-date dependencies it finds. Any merged PRs that are in the cluster directory Flux will deploy.
-
 Our Check out our [wiki](https://github.com/k8s-at-home/template-cluster-k3s/wiki) (WIP, contributions welcome) for more integrations!
-
-### 💾 Storage
-
-In no particular order, here are some popular storage related items you could install and use in your cluster:
-
-- [rook-ceph](https://github.com/rook/rook)
-- [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
-- [democratic-csi](https://github.com/democratic-csi/democratic-csi)
-- [csi-driver-nfs](https://github.com/kubernetes-csi/csi-driver-nfs)
-- [longhorn](https://github.com/longhorn/longhorn)
 
 ## 🤝 Thanks
 
