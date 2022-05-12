@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: blocky
+  name: reverse-proxy
   namespace: networking
 spec:
   interval: 20m
