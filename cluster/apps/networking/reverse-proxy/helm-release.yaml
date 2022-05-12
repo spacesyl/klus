@@ -24,6 +24,7 @@ spec:
     - name: cert-manager
       namespace: cert-manager
   values:
+    instances:
     - name: unifi
       enabled: true
       externalName: unifi.e-syl.home
