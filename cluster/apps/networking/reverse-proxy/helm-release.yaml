@@ -25,7 +25,8 @@ spec:
       namespace: cert-manager
   values:
     - name: unifi
-      externalNAme: unifi.e-syl.home
+      enabled: true
+      externalName: unifi.e-syl.home
       port: 8443
       ingress:
         annotations:
