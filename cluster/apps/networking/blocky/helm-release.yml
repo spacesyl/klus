@@ -57,10 +57,10 @@ spec:
     autoscaling:
       enabled: True
       target:  blocky
-      minReplicas:  1
-      maxReplicas:  3
-      targetCPUUtilizationPercentage:  80
-      targetMemoryUtilizationPercentage:  90
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 90
     redis:
       enabled: true
       env:
