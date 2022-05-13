@@ -169,6 +169,7 @@ spec:
         required: true
         connectionAttempts: 10
         connectionCooldown: 3s
+        database: 2
     podAnnotations:
       configmap.reloader.stakater.com/reload: "blocky-config"
     # metrics:
