@@ -167,6 +167,8 @@ spec:
       redis:
         address: blocky-redis-headless:6379
         required: true
+        connectionAttempts: 10
+        connectionCooldown: 3s
     podAnnotations:
       configmap.reloader.stakater.com/reload: "blocky-config"
     # metrics:
