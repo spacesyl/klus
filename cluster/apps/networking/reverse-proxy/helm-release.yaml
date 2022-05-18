@@ -27,13 +27,14 @@ spec:
     instances:
     - name: unifi
       enabled: true
-      externalName: unifi.e-syl.home
+      externalName: unifi.${SECRET_PRIVATE_DOMAIN}
       port: 8443
       ingress:
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "weather-sunset"
+          hajimari.io/icon: "tools"
+          hajimari.io/appName: "Unifi"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-only@kubernetescrd"
         hosts:
