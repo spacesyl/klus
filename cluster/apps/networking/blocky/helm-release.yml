@@ -86,7 +86,7 @@ spec:
         autoscaling:
           enabled: True
           targetCPU: 50
-          targetMemory: 75
+          targetMemory: 80
           minReplicas: 1
           maxReplicas: 3
         resources:
