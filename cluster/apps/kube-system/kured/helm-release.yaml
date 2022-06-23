@@ -5,27 +5,28 @@ metadata:
   name: kured
   namespace: kube-system
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://weaveworks.github.io/kured
       chart: kured
       version: 2.15.0
       sourceRef:
         kind: HelmRepository
-        name: weaveworks-kured-charts
+        name: weaveworks-kured
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
-    image:
-      repository: raspbernetes/kured
-      tag: 1.10.0
-    updateStrategy: RollingUpdate
     configuration:
-      startTime: "0:00"
-      endTime: "4:00"
-      timeZone: "Europe/Paris"
-      rebootCommand: "/usr/bin/systemctl reboot"
-    tolerations:
-    - key: "node-role.kubernetes.io/master"
-      operator: "Exists"
+      annotateNodes: true
+      startTime: "10pm"
+      endTime: "2am"
+      logFormat: "json"
+      rebootCommand: "/bin/systemctl reboot"
+      timeZone: "${TIMEZONE}"

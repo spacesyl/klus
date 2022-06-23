@@ -5,26 +5,26 @@ metadata:
   name: error-pages
   namespace: networking
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       chart: error-pages
       version: 1.1.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: k8s-at-home
         namespace: flux-system
-      interval: 5m
-  dependsOn:
-    - name: traefik
-      namespace: networking
+      interval: 15m
   install:
     createNamespace: true
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
     remediation:
-      retries: 3
+      retries: 5
+  dependsOn:
+    - name: traefik
+      namespace: networking
   values:
     image:
       repository: ghcr.io/tarampampam/error-pages
