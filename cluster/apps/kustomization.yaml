@@ -7,8 +7,8 @@ resources:
   - kube-system
   - networking
 #  - system-upgrade
-  - earn
+#  - earn
 #  - auth
 #  - data
 #  - home-automation
-  - monitoring
+#  - monitoring
