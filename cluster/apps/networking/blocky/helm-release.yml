@@ -18,7 +18,7 @@ spec:
       interval: 5m
   dependsOn:
     - name: metallb
-      namespace: metallb-system
+      namespace: networking
   values:
     env:
       TZ: Europe/Paris
