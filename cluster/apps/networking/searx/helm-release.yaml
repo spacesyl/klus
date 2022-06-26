@@ -27,9 +27,9 @@ spec:
     - name: traefik
       namespace: networking
     - name: metallb
-      namespace: metallb-system
+      namespace: networking
     - name: cert-manager
-      namespace: cert-manager
+      namespace: kube-system
   values:
     env:
       TZ: Europe/Paris
