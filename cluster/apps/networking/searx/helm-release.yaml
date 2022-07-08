@@ -24,7 +24,7 @@ spec:
     remediation:
       retries: 3
   dependsOn:
-    - name: traefik
+    - name: ingress-nginx
       namespace: networking
     - name: metallb
       namespace: networking
