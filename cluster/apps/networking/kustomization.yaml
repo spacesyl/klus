@@ -8,3 +8,7 @@ resources:
   - ingress-nginx
   - metallb
   - k8s-gateway
+  - blocky
+  - chrony
+  - reverse-proxy
+  - searx
