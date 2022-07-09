@@ -9,3 +9,4 @@ resources:
   - reflector
   - reloader
   - kured
+  - kube-vip
