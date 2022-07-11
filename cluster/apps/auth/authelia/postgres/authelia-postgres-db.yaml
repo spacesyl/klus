@@ -11,6 +11,12 @@ spec:
     size: 10Gi
   env:
     - name: POSTGRES_PASSWORD
-      value: ${SECRET_IDP_POSTGRES_PASSWORD}
+      valueFrom:
+        secretKeyRef:
+          name: idp-credentials
+          key: SECRET_IDP_POSTGRES_PASSWORD
     - name: POSTGRES_REPLICATION_PASSWORD
-      value: ${SECRET_IDP_POSTGRES_PASSWORD}
+      valueFrom:
+        secretKeyRef:
+          name: idp-credentials
+          key: SECRET_IDP_POSTGRES_PASSWORD
