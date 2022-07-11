@@ -25,7 +25,7 @@ spec:
     image:
       registry: ghcr.io
       repository: zcube/bitnami-compat/mariadb
-      tag: 10.6
+      tag: 10.8
     auth:
       database: ${SECRET_BLOCKY_DB}
       username: ${SECRET_BLOCKY_DB_USER}
