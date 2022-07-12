@@ -1,0 +1,45 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: networking
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://github.com/authelia/chartrepo/tree/master/charts
+      chart: authelia
+      version: 0.8.38
+      sourceRef:
+        kind: HelmRepository
+        name: authelia-charts
+        namespace: flux-system
+      interval: 5m
+
+  values:
+    domain: ${SECRET_DOMAIN}
+
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-production"
+        external-dns/is-public: "true"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      subdomain: id
+
+      tls:
+        enabled: true
+        secret: "authelia-tls"
+
+    pod:
+      kind: Deployment
+      env:
+        - name: TZ
+          value: ${TIMEZONE}
+
+      storage:
+        postgres:
+          enabled: true
+          host: authelia-postgres.auth.svc.cluster.local
