@@ -53,3 +53,5 @@ spec:
         key: secretIDPPGPassword
       jwt:
         key: secretIDPJWTToken
+      session:
+        key: secretIDPSession
