@@ -21,7 +21,7 @@ spec:
       namespace: networking
   values:
     env:
-      TZ: Europe/Paris
+      TZ: ${TIMEZONE}
     controller:
       replicas: 1
     affinity:
