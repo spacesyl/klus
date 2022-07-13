@@ -64,7 +64,7 @@ spec:
     redis:
       enabled: true
       env:
-        TZ: Europe/Paris
+        TZ: ${TIMEZONE}
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
