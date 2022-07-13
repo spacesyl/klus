@@ -50,4 +50,6 @@ spec:
     secret:
       existingSecret: "idp-credentials"
       storage:
-        key: SECRET_IDP_POSTGRES_PASSWORD
+        key: secretIDPPGPassword
+      jwt:
+        key: secretIDPJWTToken
