@@ -47,6 +47,21 @@ spec:
           schema: postgres
           username: postgres
 
+    configMap:
+      enabled: true
+      server:
+        read_buffer_size: 8192
+        write_buffer_size: 8192
+      theme: light
+      authentication_backend:
+        disable_reset_password: true
+        ldap:
+          enabled: true
+          url: ldap://dir1.${SECRET_PRIVATE_DOMAIN}
+      session:
+        redis:
+          enabled: false
+
     secret:
       existingSecret: "idp-credentials"
       storage:
