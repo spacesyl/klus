@@ -62,7 +62,7 @@ spec:
           username_attribute: "sAMAccountName"
           users_filter: "(&({username_attribute}={input})(objectCategory=person)(objectClass=user))"
           display_name_attribute: "displayName"
-          user: "${secretIDPLDAPUser}"
+          user: "CN=IDP_SERVICE,CN=USERS,${SECRET_PRIVATE_LDAP_ROOT_DN}"
       session:
         redis:
           enabled: false
