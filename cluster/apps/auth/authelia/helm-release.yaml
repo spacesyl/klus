@@ -55,3 +55,5 @@ spec:
         key: secretIDPJWTToken
       session:
         key: secretIDPSession
+      storageEncryptionKey:
+        key: secretIPDStorageEncryptionKey
