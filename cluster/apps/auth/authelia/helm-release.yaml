@@ -58,6 +58,11 @@ spec:
         ldap:
           enabled: true
           url: ldap://dir1.${SECRET_PRIVATE_DOMAIN}
+          base_dn: ${SECRET_PRIVATE_LDAP_ROOT_DN}
+          username_attribute: "sAMAccountName"
+          users_filter: "(&({username_attribute}={input})(objectCategory=person)(objectClass=user))"
+          display_name_attribute: "displayName"
+          user: "${secretIDPLDAPUser}"
       session:
         redis:
           enabled: false
