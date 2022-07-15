@@ -57,3 +57,5 @@ spec:
         key: secretIDPSession
       storageEncryptionKey:
         key: secretIPDStorageEncryptionKey
+      ldap:
+        key: secretIDPLDAPUserPassword
