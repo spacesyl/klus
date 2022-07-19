@@ -27,13 +27,13 @@ spec:
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
+          - labelSelector:
             matchExpressions:
-            - key: app.kubernetes.io/name
-              operator: In
-              values:
-              - blocky
-          topologyKey: "kubernetes.io/hostname"
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - blocky
+            topologyKey: "kubernetes.io/hostname"
     service:
       dns-tcp:
         enabled: true
@@ -55,8 +55,8 @@ spec:
         cpu: 250m
         memory: 250Mi
     autoscaling:
-      enabled: True
-      target:  blocky
+      enabled: true
+      target: blocky
       minReplicas: 1
       maxReplicas: 3
       targetCPUUtilizationPercentage: 80
@@ -68,7 +68,7 @@ spec:
       image:
         registry: ghcr.io
         repository: zcube/bitnami-compat/redis
-        tag: 6.2
+        tag: 6.2.7-debian-11-r16
       master:
         persistence:
           enabled: false
@@ -84,7 +84,7 @@ spec:
         persistence:
           enabled: false
         autoscaling:
-          enabled: True
+          enabled: true
           targetCPU: 50
           targetMemory: 90
           minReplicas: 1
@@ -100,11 +100,11 @@ spec:
         enabled: false
         sentinel: false
       sentinel:
-        enabled: True
+        enabled: true
         image:
           registry: ghcr.io
           repository: zcube/bitnami-compat/redis-sentinel
-          tag: 6.2
+          tag: 6.2.7-debian-11-r16
         resources:
           requests:
             cpu: 125m
