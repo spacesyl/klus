@@ -33,7 +33,7 @@ spec:
                   operator: In
                   values:
                     - blocky
-              topologyKey: "kubernetes.io/hostname"
+            topologyKey: "kubernetes.io/hostname"
     service:
       dns-tcp:
         enabled: true
