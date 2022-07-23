@@ -12,3 +12,4 @@ resources:
   - chrony
   - reverse-proxy
   - whoogle
+  - searxng
