@@ -11,4 +11,4 @@ resources:
   - blocky
   - chrony
   - reverse-proxy
-  - searx
+  - whoogle
