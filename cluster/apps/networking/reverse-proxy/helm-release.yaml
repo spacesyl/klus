@@ -35,8 +35,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "tools"
           hajimari.io/appName: "Unifi"
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-only@kubernetescrd"
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         hosts:
           - host: "unifi.${SECRET_DOMAIN}"
             paths:
