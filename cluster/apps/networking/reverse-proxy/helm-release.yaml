@@ -46,3 +46,17 @@ spec:
           - hosts:
               - "unifi.${SECRET_DOMAIN}"
             secretName: "unifi-tls"
+    - name: vpn
+      enabled: true
+      test: false
+      ip: 10.1.0.1
+      port: 80
+      ingress:
+        annotations:
+          external-dns/is-public: "true"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        hosts:
+          - host: "vpn.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
