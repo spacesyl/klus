@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: reverse-proxy
-      version: 2.3.3
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
@@ -25,38 +25,38 @@ spec:
       namespace: kube-system
   values:
     instances:
-    - name: unifi
-      enabled: true
-      externalName: unifi.${SECRET_PRIVATE_DOMAIN}
-      port: 8443
-      ingress:
-        annotations:
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "tools"
-          hajimari.io/appName: "Unifi"
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        hosts:
-          - host: "unifi.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - hosts:
-              - "unifi.${SECRET_DOMAIN}"
-            secretName: "unifi-tls"
-    - name: vpn
-      enabled: true
-      test: false
-      ip: 10.1.0.1
-      port: 80
-      ingress:
-        annotations:
-          external-dns/is-public: "true"
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-        hosts:
-          - host: "vpn.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
+      - name: unifi
+        enabled: true
+        externalName: unifi.${SECRET_PRIVATE_DOMAIN}
+        port: 8443
+        ingress:
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            hajimari.io/enable: "true"
+            hajimari.io/icon: "tools"
+            hajimari.io/appName: "Unifi"
+            nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          hosts:
+            - host: "unifi.${SECRET_DOMAIN}"
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - "unifi.${SECRET_DOMAIN}"
+              secretName: "unifi-tls"
+      - name: vpn
+        enabled: true
+        test: false
+        ip: 10.1.0.1
+        port: 80
+        ingress:
+          annotations:
+            external-dns/is-public: "true"
+            external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+            external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          hosts:
+            - host: "vpn.${SECRET_DOMAIN}"
+              paths:
+                - path: /
+                  pathType: Prefix
