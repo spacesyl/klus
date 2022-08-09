@@ -22,9 +22,6 @@ spec:
   values:
     env:
       TZ: ${TIMEZONE}
-    envFrom:
-      - secretRef:
-          name: blocky-secrets
     controller:
       replicas: 1
     affinity:
