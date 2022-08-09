@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - helm-release.yml
   # - mariadb
-  - secret.sops.yaml
+  - secret.sops.yml
