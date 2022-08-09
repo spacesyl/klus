@@ -144,6 +144,7 @@ spec:
           ${SECRET_DOMAIN}: tcp+udp:k8s-gateway
           0.1.10.in-addr.arpa: tcp+udp:10.1.0.4
           1.1.10.in-addr.arpa: tcp+udp:10.1.0.4
+          1.0.10.in-addr.arpa: tcp+udp:10.1.0.4
       blocking:
         blackLists:
           ads:
