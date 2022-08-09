@@ -36,5 +36,5 @@ spec:
             - name: EARNAPP_UUID
               valueFrom:
                 secretKeyRef:
-                  name: earnappSecrets
+                  name: earnapp-secrets
                   key: earnappUuid1
