@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,16 +22,19 @@ spec:
     spec:
       # renovate: registryUrl=https://github.com/fazalfarhan01/EarnApp-Docker
       containers:
-      - name: earnapp
-        image: fazalfarhan01/earnapp:lite-1.294.218
-        imagePullPolicy: Always
-        resources:
-          limits:
-            cpu: "0.5"
-            memory: 128Mi
-          requests:
-            cpu: "0.1"
-            memory: 16Mi
-        env:
-        - name: EARNAPP_UUID
-          value: ${SECRET_EARNAPP_2}
+        - name: earnapp
+          image: fazalfarhan01/earnapp:lite-1.294.218
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: 128Mi
+            requests:
+              cpu: "0.1"
+              memory: 16Mi
+          env:
+            - name: EARNAPP_UUID
+              valueFrom:
+                secretKeyRef:
+                  name: earnappSecrets
+                  key: earnappUuid2
