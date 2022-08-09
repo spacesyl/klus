@@ -21,12 +21,10 @@ spec:
       namespace: networking
   values:
     env:
-      - TZ: ${TIMEZONE}
-      - name: SECRET_PRIVATE_DOMAIN
-        valueFrom:
-          secretKeyRef:
-            name: blocky-secrets
-            key: SECRET_PRIVATE_DOMAIN
+      TZ: ${TIMEZONE}
+    envFrom:
+      - secretRef:
+          name: blocky-secrets
     controller:
       replicas: 1
     affinity:
