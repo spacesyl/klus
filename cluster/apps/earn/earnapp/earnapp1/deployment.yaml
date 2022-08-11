@@ -38,3 +38,5 @@ spec:
                 secretKeyRef:
                   name: earnapp-secrets
                   key: earnappUuid1
+      nodeSelector:
+        network: internal
