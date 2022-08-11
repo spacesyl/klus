@@ -27,6 +27,8 @@ spec:
       namespace: kube-system
   values:
     controller:
+      nodeSelector:
+        network: internal
       replicaCount: 1
       extraEnvs:
         - name: TZ
