@@ -8,5 +8,4 @@ resources:
   - metrics-server
   - reflector
   - reloader
-  - kured
   - kube-vip
