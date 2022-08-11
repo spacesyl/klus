@@ -20,6 +20,8 @@ spec:
     - name: metallb
       namespace: networking
   values:
+    nodeSelector:
+      network: internal
     env:
       TZ: ${TIMEZONE}
     controller:
