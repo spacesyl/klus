@@ -22,3 +22,8 @@ spec:
     remediation:
       retries: 5
   values:
+    servers:
+    - zones:
+      - zone: .
+      - name: forward
+        parameters: . 8.8.8.8,8.8.4.4,1.1.1.1
