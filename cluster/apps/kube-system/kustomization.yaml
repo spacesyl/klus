@@ -9,4 +9,4 @@ resources:
   - reflector
   - reloader
   - kube-vip
-  - coredns
+  # - coredns
