@@ -137,11 +137,11 @@ spec:
         - tcp+udp:8.8.8.8
       conditional:
         mapping:
-          ${SECRET_PRIVATE_DOMAIN}: tcp+udp:10.1.0.4
+          ${SECRET_PRIVATE_DOMAIN}: tcp+udp:10.0.1.4
           ${SECRET_DOMAIN}: tcp+udp:k8s-gateway
-          0.1.10.in-addr.arpa: tcp+udp:10.1.0.4
-          1.1.10.in-addr.arpa: tcp+udp:10.1.0.4
-          1.0.10.in-addr.arpa: tcp+udp:10.1.0.4
+          0.1.10.in-addr.arpa: tcp+udp:10.0.1.4
+          1.1.10.in-addr.arpa: tcp+udp:10.0.1.4
+          1.0.10.in-addr.arpa: tcp+udp:10.0.1.4
       blocking:
         blackLists:
           ads:
@@ -161,7 +161,7 @@ spec:
       logLevel: info
       httpPort: 4000
       clientLookup:
-        upstream: tcp+udp:10.1.0.4
+        upstream: tcp+udp:10.0.1.4
       prometheus:
         enable: true
         path: /metrics
