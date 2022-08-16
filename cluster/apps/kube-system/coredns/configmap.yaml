@@ -28,5 +28,5 @@ data:
     ${SECRET_PRIVATE_DOMAIN}:53 {
         errors
         cache 30
-        forward . 10.1.0.4
+        forward . 10.0.1.4
     }
