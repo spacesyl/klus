@@ -8,5 +8,5 @@ resources:
   - metrics-server
   - reflector
   - reloader
-  - kube-vip
-  # - coredns
+  # - kube-vip
+  - coredns
