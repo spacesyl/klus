@@ -22,8 +22,6 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
-    nodeSelector:
-      network: external
     crds:
       enabled: false
     csi:
