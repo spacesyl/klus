@@ -19,9 +19,9 @@ spec:
     - name: rook-ceph
   values:
     monitoring:
-      enabled: true
+      enabled: false
     toolbox:
-      enabled: true
+      enabled: false
     ingress:
       dashboard:
         annotations:
