@@ -18,6 +18,8 @@ spec:
   dependsOn:
     - name: rook-ceph
   values:
+    nodeSelector:
+      storage: true
     monitoring:
       enabled: false
     toolbox:
