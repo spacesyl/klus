@@ -20,10 +20,8 @@ spec:
   values:
     monitoring:
       enabled: true
-
     toolbox:
       enabled: true
-
     ingress:
       dashboard:
         annotations:
@@ -50,15 +48,15 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "knod4"
+          - name: "kasto1"
             devices:
-              - name: "sdb"
-          - name: "knod5"
+              - name: "nvme1n1"
+          - name: "kasto1"
             devices:
-              - name: "sdb"
-          - name: "knod6"
+              - name: "nvme1n1"
+          - name: "kasto1"
             devices:
-              - name: "sdb"
+              - name: "nvme1n1"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
