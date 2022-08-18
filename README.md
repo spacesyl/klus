@@ -400,7 +400,7 @@ Now if nothing is working, that is expected. This is DNS after all!
 
 By default in this template Kubernetes ingresses are set to use the [Let's Encrypt Staging Environment](https://letsencrypt.org/docs/staging-environment/). This will hopefully reduce issues from ACME on requesting certificates until you are ready to use this in "Production".
 
-Once you have confirmed there are no issues requesting your certificates replace `letsencrypt-staging` with `letsencrypt-production` in your ingress annotations for `cert-manager.io/cluster-issuer`
+Once you have confirmed there are no issues requesting your certificates replace `letsencrypt-staging` with `letsencrypt-staging` in your ingress annotations for `cert-manager.io/cluster-issuer`
 
 ### 🤖 Renovatebot
 

@@ -31,7 +31,7 @@ spec:
         port: 8443
         ingress:
           annotations:
-            cert-manager.io/cluster-issuer: "letsencrypt-production"
+            cert-manager.io/cluster-issuer: "letsencrypt-staging"
             hajimari.io/enable: "true"
             hajimari.io/icon: "tools"
             hajimari.io/appName: "Unifi"
