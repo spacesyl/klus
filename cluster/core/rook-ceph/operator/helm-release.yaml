@@ -23,10 +23,10 @@ spec:
     crds: CreateReplace
   values:
     crds:
-      enabled: true
-    csi:
-      enableCephfsDriver: false
-      enableCephfsSnapshotter: false
+      enabled: false
+    # csi:
+    #   enableCephfsDriver: false
+    #   enableCephfsSnapshotter: false
     resources:
       requests:
         cpu: 100m
