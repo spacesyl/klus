@@ -16,3 +16,4 @@ resources:
   - authelia.yaml
   - searxng.yaml
   - coredns.yaml
+  - calico.yaml
