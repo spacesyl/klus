@@ -18,3 +18,4 @@ resources:
   - coredns.yaml
   - calico.yaml
   - rook-ceph.yaml
+  - longhorn.yaml
