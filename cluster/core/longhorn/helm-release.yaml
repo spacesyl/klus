@@ -16,6 +16,15 @@ spec:
         namespace: flux-system
       interval: 1m
   values:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      host: storage.${SECRET_DOMAIN}
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-staging"
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+      tls: false
+      tlsSecret: longhorn-tls
     longhornDriver:
       nodeSelector:
         storage: true
