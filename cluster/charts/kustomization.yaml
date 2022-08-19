@@ -17,5 +17,5 @@ resources:
   - searxng.yaml
   - coredns.yaml
   - calico.yaml
-  - rook-ceph.yaml
+  # - rook-ceph.yaml
   - longhorn.yaml
