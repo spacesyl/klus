@@ -28,7 +28,7 @@ spec:
       tlsSecret: longhorn-tls
     longhornDriver:
       nodeSelector:
-        storage: true
+        storage: ssd
     longhornManager:
       nodeSelector:
-        storage: true
+        storage: ssd
