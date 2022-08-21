@@ -18,3 +18,4 @@ resources:
   - calico.yaml
   # - rook-ceph.yaml
   - longhorn.yaml
+  - k8shome.yaml
