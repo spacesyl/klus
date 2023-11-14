@@ -6,7 +6,7 @@ metadata:
   namespace: auth
 spec:
   replicas: 2
-  image: docker.io/library/postgres:15.0-alpine
+  image: docker.io/library/postgres:15.5-alpine
   database:
     size: 10Gi
   env:
